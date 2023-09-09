@@ -2,38 +2,39 @@
 * This script retrieves highly detailed user information using with **`advapi32`**, **`netapi32`** and **`kernel32`** DLLs.
 
 # INSTALLATION
-
-     pip install requirements.txt
-
+```py
+pip install requirements.txt
+```
 # A quick look at what the code is doing
 
 * If you want to have a quick look at what the script does you can use the code below.
 
-      import win32net
-      import subprocess
-      
-      powershell_command = "Get-WmiObject -Class Win32_UserAccount | Select-Object -ExpandProperty Name"
-      result = subprocess.run(["powershell", "-Command", powershell_command], capture_output = True, text = True, shell = True, encoding = 'latin')
-      output_lines = result.stdout.strip().split('\n')
-      usernames = [line.strip() for line in output_lines if line.strip()]
-      
-      servername = None # A pointer to a constant string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is None, the local computer is used.
-      level = 4
-      
-      try:
-          for username in usernames:
-              userinfo = win32net.NetUserGetInfo(servername, username, level)
-          
-              print(f"User Info for {username}:")
-              for key, value in userinfo.items():
-                  print(f"    {key}: {value}")
-              print('\n')
-              print("-" * 50)
-              print('\n')
-      
-      except win32net.error as e:
-          print("Error:", e)
+```py
+from win32net import NetUserGetInfo, error
+from subprocess import run
 
+powershell_command = "Get-WmiObject -Class Win32_UserAccount | Select-Object -ExpandProperty Name"
+result = run(["powershell", "-Command", powershell_command], capture_output = True, text = True, shell = True, encoding = 'latin')
+output_lines = result.stdout.strip().split('\n')
+usernames = [line.strip() for line in output_lines if line.strip()]
+
+servername = None # A pointer to a constant string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is None, the local computer is used.
+level = 4
+
+try:
+    for username in usernames:
+        userinfo = NetUserGetInfo(servername, username, level)
+    
+        print(f"User Info for {username}:")
+        for key, value in userinfo.items():
+            print(f"    {key}: {value}")
+        print('\n')
+        print("-" * 50)
+        print('\n')
+
+except error as e:
+    print("Error:", e)
+```
 # Below you can see the information the Script gets for each user ↓ ↓
 
 * ***Profile*** -  A pointer to a Unicode string that specifies a path to the user's profile. This value can be a NULL string, a local absolute path, or a UNC path.
