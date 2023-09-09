@@ -35,7 +35,7 @@ try:
 except error as e:
     print("Error:", e)
 ```
-# Below you can see the information the Script gets for each user ↓ ↓
+# Below you can see the information the Script gets for each user on your local computer ↓ ↓
 
 * ***Profile*** -  A pointer to a Unicode string that specifies a path to the user's profile. This value can be a NULL string, a local absolute path, or a UNC path.
 * ***Username*** - A pointer to a Unicode string that specifies the name of the user account.
