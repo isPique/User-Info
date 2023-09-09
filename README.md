@@ -66,3 +66,5 @@ except error as e:
 * ***Bad Passwords Count*** - The number of times the user tried to log on to the account using an incorrect password. A value of – 1 indicates that the value is unknown.
 * ***Units Per Week*** - The number of equal-length time units into which the week is divided. This value is required to compute the length of the bit string in the usri3_logon_hours member.
 * ***Country Code*** - The country/region code for the user's language of choice.
+
+* **If you want to learn more about Win32api, you can also check out [this link](https://learn.microsoft.com/en-us/windows/win32/api/lmaccess/)**.
