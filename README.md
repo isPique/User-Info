@@ -3,11 +3,11 @@
 
 # INSTALLATION
 ```py
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 # A quick look at what the code is doing
 
-* If you want to have a quick look at what the script does you can use the code below.
+* If you want to take a quick look at what the code is doing, you can use the code below.
 
 ```py
 from win32net import NetUserGetInfo, error
