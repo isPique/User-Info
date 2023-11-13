@@ -2,7 +2,7 @@
 * This script retrieves highly detailed user information using with **`advapi32`**, **`netapi32`** and **`kernel32`** DLLs.
 
 # INSTALLATION
-```py
+```console
 pip install -r requirements.txt
 ```
 # A quick look at what the code is doing
