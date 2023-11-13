@@ -35,7 +35,7 @@ try:
 except error as e:
     print("Error:", e)
 ```
-# Below you can see the information the Script gets for each user on your local computer ↓ ↓
+# Below you can see the information the Script gets for each user on your local computer:
 
 * ***Profile*** -  A pointer to a Unicode string that specifies a path to the user's profile. This value can be a NULL string, a local absolute path, or a UNC path.
 * ***Username*** - A pointer to a Unicode string that specifies the name of the user account.
@@ -68,3 +68,7 @@ except error as e:
 * ***Country Code*** - The country/region code for the user's language of choice.
 
 * **If you want to learn more about Win32api, you can also check out [this link](https://learn.microsoft.com/en-us/windows/win32/api/lmaccess/)**.
+
+# Donations Accepted:
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/ispique)
