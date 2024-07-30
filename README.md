@@ -1,11 +1,10 @@
-# Get user information with DLLs provided by the Windows API
-* This script retrieves highly detailed user information using with **`advapi32`**, **`netapi32`** and **`kernel32`** DLLs.
-
 # INSTALLATION
 ```bash
 pip install -r requirements.txt
 ```
-# A quick look at what the code is doing
+
+## Get user information with DLLs provided by the Windows API
+* This script retrieves highly detailed user information using with **`advapi32`**, **`netapi32`** and **`kernel32`** DLLs.
 
 * If you want to take a quick look at what the code is doing, you can use the code below.
 
@@ -32,7 +31,7 @@ for username in users:
         print(f"    {key}: {value}")
     print('\n', "-" * 50, '\n')
 ```
-# Below you can see the information the Script gets for each user on your local computer:
+## Below you can see the information the Script gets for each user on your local computer:
 
 * ***Profile*** -  A pointer to a Unicode string that specifies a path to the user's profile. This value can be a NULL string, a local absolute path, or a UNC path.
 * ***Username*** - A pointer to a Unicode string that specifies the name of the user account.
@@ -64,4 +63,5 @@ for username in users:
 * ***Units Per Week*** - The number of equal-length time units into which the week is divided. This value is required to compute the length of the bit string in the usri3_logon_hours member.
 * ***Country Code*** - The country/region code for the user's language of choice.
 
-* **If you want to learn more about Win32api, you can also check out [this link](https://learn.microsoft.com/en-us/windows/win32/api/lmaccess/)**.
+>[!NOTE]
+> If you want to learn more about **Win32api**, you can also check out **[this link](https://learn.microsoft.com/en-us/windows/win32/api/lmaccess/)**.
