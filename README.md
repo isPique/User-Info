@@ -2,7 +2,7 @@
 * This script retrieves highly detailed user information using with **`advapi32`**, **`netapi32`** and **`kernel32`** DLLs.
 
 # INSTALLATION
-```console
+```bash
 pip install -r requirements.txt
 ```
 # A quick look at what the code is doing
@@ -10,30 +10,27 @@ pip install -r requirements.txt
 * If you want to take a quick look at what the code is doing, you can use the code below.
 
 ```py
-from win32net import NetUserGetInfo, error
-from subprocess import run
-
-powershell_command = "Get-WmiObject -Class Win32_UserAccount | Select-Object -ExpandProperty Name"
-result = run(["powershell", "-Command", powershell_command], capture_output = True, text = True, shell = True, encoding = 'latin')
-output_lines = result.stdout.strip().split('\n')
-usernames = [line.strip() for line in output_lines if line.strip()]
+from win32net import NetUserEnum, NetUserGetInfo
+from win32netcon import FILTER_NORMAL_ACCOUNT
 
 servername = None # A pointer to a constant string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is None, the local computer is used.
 level = 4
+resume = 0
+users = []
 
-try:
-    for username in usernames:
-        userinfo = NetUserGetInfo(servername, username, level)
-    
-        print(f"User Info for {username}:")
-        for key, value in userinfo.items():
-            print(f"    {key}: {value}")
-        print('\n')
-        print("-" * 50)
-        print('\n')
+while True:
+    users_info, total, resume = NetUserEnum(servername, 0, FILTER_NORMAL_ACCOUNT, resume)
+    users.extend([user['name'] for user in users_info])
+    if not resume:
+        break
 
-except error as e:
-    print("Error:", e)
+for username in users:
+    userinfo = NetUserGetInfo(servername, username, level)
+
+    print(f"User Info for {username}:")
+    for key, value in userinfo.items():
+        print(f"    {key}: {value}")
+    print('\n', "-" * 50, '\n')
 ```
 # Below you can see the information the Script gets for each user on your local computer:
 
@@ -68,7 +65,3 @@ except error as e:
 * ***Country Code*** - The country/region code for the user's language of choice.
 
 * **If you want to learn more about Win32api, you can also check out [this link](https://learn.microsoft.com/en-us/windows/win32/api/lmaccess/)**.
-
-# Donations Accepted:
-
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/ispique)
